@@ -78,67 +78,77 @@ paste("Dutch: oPE by Frequency correlation:",cor(dat_du_5$oPE,dat_du_5$Freq))
 ```
 ```{r}
 #Lexial decision behaviour
-dat_lexdec = read.csv("./lex_dec_thresholded_ope_15-85p.csv",header = T)
+dat_lexdec = read.csv("./lex_dec_noise_thresholded_ope_.csv",header = T)
 summary(dat_lexdec)
 ```
 ```{r}
 #correlation between original oPe and different thresholds
-corr_df = data.frame(dat_lexdec$ope, dat_lexdec$py_ope_ger_binary_th_15p, dat_lexdec$py_ope_ger_binary_th_20p, dat_lexdec$py_ope_ger_binary_th_25p, dat_lexdec$py_ope_ger_binary_th_30p, dat_lexdec$py_ope_ger_binary_th_35p,dat_lexdec$py_ope_ger_binary_th_40p, dat_lexdec$py_ope_ger_binary_th_45p, dat_lexdec$py_ope_ger_binary_th_50p, dat_lexdec$py_ope_ger_binary_th_55p, dat_lexdec$py_ope_ger_binary_th_60p,
-dat_lexdec$py_ope_ger_binary_th_65p, dat_lexdec$py_ope_ger_binary_th_70p, dat_lexdec$py_ope_ger_binary_th_75p, dat_lexdec$py_ope_ger_binary_th_80p, dat_lexdec$py_ope_ger_binary_th_85p)
+corr_df = data.frame(dat_lexdec$ope, dat_lexdec$py_ope_ger_binary_th_10p, dat_lexdec$py_ope_ger_binary_th_15p, dat_lexdec$py_ope_ger_binary_th_20p, dat_lexdec$py_ope_ger_binary_th_25p, dat_lexdec$py_ope_ger_binary_th_30p, dat_lexdec$py_ope_ger_binary_th_35p,dat_lexdec$py_ope_ger_binary_th_40p, dat_lexdec$py_ope_ger_binary_th_45p, dat_lexdec$py_ope_ger_binary_th_50p, dat_lexdec$py_ope_ger_binary_th_55p, dat_lexdec$py_ope_ger_binary_th_60p,
+dat_lexdec$py_ope_ger_binary_th_65p, dat_lexdec$py_ope_ger_binary_th_70p, dat_lexdec$py_ope_ger_binary_th_75p, dat_lexdec$py_ope_ger_binary_th_80p, dat_lexdec$py_ope_ger_binary_th_85p, dat_lexdec$py_ope_ger_binary_th_90p)
 cor(corr_df)
 ```
 ```{r}
 #linear mixed model for reaction times using the 5-letter prediction with different thresholds
-m_group_log = (lmer(log(rt)~scale(ope)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(ope)|string),data=dat_lexdec))
+m_group_log = (lmer(log(time)~scale(ope)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(ope)|stim),data=dat_lexdec))
 summary(m_group_log)
+#10p
+m_group_log_10p = (lmer(log(time)~scale(py_ope_ger_binary_th_10p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_10p)|stim),data=dat_lexdec))
+summary(m_group_log_10p)
 #15p
-m_group_log_15p = (lmer(log(rt)~scale(py_ope_ger_binary_th_15p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_15p)|string),data=dat_lexdec))
+m_group_log_15p = (lmer(log(time)~scale(py_ope_ger_binary_th_15p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_15p)|stim),data=dat_lexdec))
 summary(m_group_log_15p)
 #20p
-m_group_log_20p = (lmer(log(rt)~scale(py_ope_ger_binary_th_20p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_20p)|string),data=dat_lexdec))
+m_group_log_20p = (lmer(log(time)~scale(py_ope_ger_binary_th_20p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_20p)|stim),data=dat_lexdec))
 summary(m_group_log_20p)
 #25p
-m_group_log_25p = (lmer(log(rt)~scale(py_ope_ger_binary_th_25p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_25p)|string),data=dat_lexdec))
+m_group_log_25p = (lmer(log(time)~scale(py_ope_ger_binary_th_25p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_25p)|stim),data=dat_lexdec))
 summary(m_group_log_25p)
 #30p
-m_group_log_30p = (lmer(log(rt)~scale(py_ope_ger_binary_th_30p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_30p)|string),data=dat_lexdec))
+m_group_log_30p = (lmer(log(time)~scale(py_ope_ger_binary_th_30p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_30p)|stim),data=dat_lexdec))
 summary(m_group_log_30p)
 #35p
-m_group_log_35p = (lmer(log(rt)~scale(py_ope_ger_binary_th_35p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_35p)|string),data=dat_lexdec))
+m_group_log_35p = (lmer(log(time)~scale(py_ope_ger_binary_th_35p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_35p)|stim),data=dat_lexdec))
 summary(m_group_log_35p)
 #40p
-m_group_log_40p = (lmer(log(rt)~scale(py_ope_ger_binary_th_40p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_40p)|string),data=dat_lexdec))
+m_group_log_40p = (lmer(log(time)~scale(py_ope_ger_binary_th_40p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_40p)|stim),data=dat_lexdec))
 summary(m_group_log_40p)
 #45p
-m_group_log_45p = (lmer(log(rt)~scale(py_ope_ger_binary_th_45p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_45p)|string),data=dat_lexdec))
+m_group_log_45p = (lmer(log(time)~scale(py_ope_ger_binary_th_45p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_45p)|stim),data=dat_lexdec))
 summary(m_group_log_45p)
 #50p
-m_group_log_50p = (lmer(log(rt)~scale(py_ope_ger_binary_th_50p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_50p)|string),data=dat_lexdec))
+m_group_log_50p = (lmer(log(time)~scale(py_ope_ger_binary_th_50p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_50p)|stim),data=dat_lexdec))
 summary(m_group_log_50p)
 #55p
-m_group_log_55p = (lmer(log(rt)~scale(py_ope_ger_binary_th_55p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_55p)|string),data=dat_lexdec))
+m_group_log_55p = (lmer(log(time)~scale(py_ope_ger_binary_th_55p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_55p)|stim),data=dat_lexdec))
 summary(m_group_log_55p)
 #60p
-m_group_log_60p = (lmer(log(rt)~scale(py_ope_ger_binary_th_60p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_60p)|string),data=dat_lexdec))
+m_group_log_60p = (lmer(log(time)~scale(py_ope_ger_binary_th_60p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_60p)|stim),data=dat_lexdec))
 summary(m_group_log_60p)
 #65p
-m_group_log_65p = (lmer(log(rt)~scale(py_ope_ger_binary_th_65p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_65p)|string),data=dat_lexdec))
+m_group_log_65p = (lmer(log(time)~scale(py_ope_ger_binary_th_65p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_65p)|stim),data=dat_lexdec))
 summary(m_group_log_65p)
 #70p
-m_group_log_70p = (lmer(log(rt)~scale(py_ope_ger_binary_th_70p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_70p)|string),data=dat_lexdec))
+m_group_log_70p = (lmer(log(time)~scale(py_ope_ger_binary_th_70p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_70p)|stim),data=dat_lexdec))
 summary(m_group_log_70p)
 #75p
-m_group_log_75p = (lmer(log(rt)~scale(py_ope_ger_binary_th_75p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_75p)|string),data=dat_lexdec))
+m_group_log_75p = (lmer(log(time)~scale(py_ope_ger_binary_th_75p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_75p)|stim),data=dat_lexdec))
 summary(m_group_log_75p)
 #80p
-m_group_log_80p = (lmer(log(rt)~scale(py_ope_ger_binary_th_80p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_80p)|string),data=dat_lexdec))
+m_group_log_80p = (lmer(log(time)~scale(py_ope_ger_binary_th_80p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_80p)|stim),data=dat_lexdec))
 summary(m_group_log_80p)
 #85p
-m_group_log_85p = (lmer(log(rt)~scale(py_ope_ger_binary_th_85p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_85p)|string),data=dat_lexdec))
+m_group_log_85p = (lmer(log(time)~scale(py_ope_ger_binary_th_85p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_85p)|stim),data=dat_lexdec))
 summary(m_group_log_85p)
+#90p
+m_group_log_90p = (lmer(log(time)~scale(py_ope_ger_binary_th_90p)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(py_ope_ger_binary_th_90p)|stim),data=dat_lexdec))
+summary(m_group_log_90p)
+
+#Null model without both parameters
+Null_model = (lmer(log(time)~group_num+err+freq+(1|vp)+(scale(ope)|stim),data=dat_lexdec))
+summary(Null_model)
 
 #Model comparison: 
-aic_ger = anova(Null_model,m_group_log,m_group_log_15p,m_group_log_20p,m_group_log_25p,m_group_log_30p,m_group_log_35p,m_group_log_40p,m_group_log_45p,m_group_log_50p,m_group_log_55p,m_group_log_60p,m_group_log_65p,m_group_log_70p,m_group_log_75p,m_group_log_80p,m_group_log_85p)
+aic_ger = anova(Null_model,m_group_log,m_group_log_10p,m_group_log_15p,m_group_log_20p,m_group_log_25p,m_group_log_30p,m_group_log_35p,m_group_log_40p,m_group_log_45p,m_group_log_50p,m_group_log_55p,m_group_log_60p,m_group_log_65p,m_group_log_70p,m_group_log_75p,m_group_log_80p,m_group_log_85p,m_group_log_90p)
 aic_ger
 ```
 ```{r}
@@ -146,7 +156,7 @@ aic_ger
 
 aic_diff = c(aic_ger$AIC[1]- aic_ger$AIC[3:length(aic_ger$AIC)])
 h_aic = c(aic_ger$AIC[1]-aic_ger$AIC[2])
-Model = as.factor(c("15p","20p","25p","30p","35p","40p","45p","50p","55p","60p","65p","70p","75p","80p","85p"))
+Model = as.factor(c("10p","15p","20p","25p","30p","35p","40p","45p","50p","55p","60p","65p","70p","75p","80p","85p","90p"))
 model_comp_plot_ger = data.frame(aic_diff,Model)
 h_aic
 
@@ -165,75 +175,8 @@ aic_pl_ger = ggplot(model_comp_plot_ger,aes(y=aic_diff,x=Model,group = 1))+
 aic_pl_ger
 ```
 
-```{r}
-#linear mixed model for reaction times using the 5-letter prediction
-m_group_log = (lmer(log(rt)~scale(ope)*group_num+scale(npix)*group_num+err+freq+(1|vp)+(scale(ope)|string),data=dat_lexdec))
-summary(m_group_log)
-
-#Model without the number of pixel parameters
-m_group_log_only_oPE = (lmer(log(rt)~scale(ope)*group_num+err+freq+(1|vp)+(scale(ope)|string),data=dat_lexdec))
-summary(m_group_log_only_oPE)
-
-#Model without the oPE parameters
-m_group_log_only_nPix = (lmer(log(rt)~scale(npix)*group_num+err+freq+(1|vp)+(scale(ope)|string),data=dat_lexdec))
-summary(m_group_log_only_nPix)
-
-#Null model without both parameters
-Null_model = (lmer(log(rt)~group_num+err+freq+(1|vp)+(scale(ope)|string),data=dat_lexdec))
-summary(Null_model)
-
-#Model comparison: 
-aic_ger = anova(Null_model,m_group_log_only_nPix,m_group_log_only_oPE,m_group_log)
-```
-
-```{r}
-#Bar plot for model comparison
-
-aic_diff = c(aic_ger$AIC[1]- aic_ger$AIC[2:length(aic_ger$AIC)])
-Model = as.factor(c("15p","20p","Both"))
-model_comp_plot_ger = data.frame(aic_diff,Model)
-
-model_comp_plot_ger$Model = factor(model_comp_plot_ger$Model, levels=levels(model_comp_plot_ger$Model)[c(2,3,1)], ordered=TRUE)
 
 
-r <- .5
-t <- seq(0, 180, by = 1) * pi / 180
-x <- r * cos(t)
-y <- r*4 * sin(t)
-y[20:162] <- y[20] # Flattens the arc
-
-arc.df <- data.frame(Group = x, Value = y)
-
-r <- .5
-t <- seq(0, 180, by = 1) * pi / 180
-x <- r * cos(t)
-y <- r*4 * sin(t)
-y[20:181] <- y[20] # Flattens the arc
-
-arc.df_lng <- data.frame(Group = x, Value = y)
-r <- .5
-t <- seq(0, 180, by = 1) * pi / 180
-x <- r * cos(t)
-y <- r*4 * sin(t)
-y[0:162] <- y[20] # Flattens the arc
-
-arc.df_ri <- data.frame(Group = x, Value = y)
-
-
-aic_pl_ger = ggplot(model_comp_plot_ger,aes(y=aic_diff,x=Model))+
-  geom_bar(stat="identity")+
-  theme_minimal()+
-  ylab("AIC difference to H0")+
-  xlab("Model")+
-  geom_line(data = arc.df, aes(Group+1.5, Value+41), lty = 1) +
-  geom_text(x = 1.5, y = 42, label = "*", cex=7)+
-  geom_line(data = arc.df_lng, aes(Group+2.5, Value+45), lty = 1) +
-  geom_line(data = arc.df_ri, aes(Group+1.5, Value+45), lty = 1) +
-  geom_text(x = 2, y = 46, label = "*", cex=7)+
-  ylim(0,46)
-aic_pl_ger
-```
-```
 
 ```{r}
 #Code for Fig. 3a
@@ -474,97 +417,97 @@ summary(dat_lexdec_ger2)
 ```{r}
 #Model estimation for presentaion without noise
 #Full model
-deg_lum_ope_model_deg0 = (lmer(log(time)~scale(ope)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+deg_lum_ope_model_deg0 = (lmer(log(time)~scale(ope)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 
 summary(deg_lum_ope_model_deg0)
 
 #10p
-deg_lum_ope_model_deg0_10p = (lmer(log(time)~scale(py_ope_ger_binary_th_10p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+deg_lum_ope_model_deg0_10p = (lmer(log(time)~scale(py_ope_ger_binary_th_10p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 
 summary(deg_lum_ope_model_deg0_10p)
 
 #15p
-deg_lum_ope_model_deg0_15p = (lmer(log(time)~scale(py_ope_ger_binary_th_15p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+deg_lum_ope_model_deg0_15p = (lmer(log(time)~scale(py_ope_ger_binary_th_15p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 
 summary(deg_lum_ope_model_deg0_15p)
 
 #20p
-deg_lum_ope_model_deg0_20p = (lmer(log(time)~scale(py_ope_ger_binary_th_20p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+deg_lum_ope_model_deg0_20p = (lmer(log(time)~scale(py_ope_ger_binary_th_20p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 
 summary(deg_lum_ope_model_deg0_20p)
 
 #25p
-deg_lum_ope_model_deg0_25p = (lmer(log(time)~scale(py_ope_ger_binary_th_25p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+deg_lum_ope_model_deg0_25p = (lmer(log(time)~scale(py_ope_ger_binary_th_25p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 
 summary(deg_lum_ope_model_deg0_25p)
 
 #30p
-deg_lum_ope_model_deg0_30p = (lmer(log(time)~scale(py_ope_ger_binary_th_30p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+deg_lum_ope_model_deg0_30p = (lmer(log(time)~scale(py_ope_ger_binary_th_30p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 
 summary(deg_lum_ope_model_deg0_30p)
 
 #35p
-deg_lum_ope_model_deg0_35p = (lmer(log(time)~scale(py_ope_ger_binary_th_35p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+deg_lum_ope_model_deg0_35p = (lmer(log(time)~scale(py_ope_ger_binary_th_35p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 
 summary(deg_lum_ope_model_deg0_35p)
 
 #40p
-deg_lum_ope_model_deg0_40p = (lmer(log(time)~scale(py_ope_ger_binary_th_40p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+deg_lum_ope_model_deg0_40p = (lmer(log(time)~scale(py_ope_ger_binary_th_40p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 
 summary(deg_lum_ope_model_deg0_40p)
 
 #45p
-deg_lum_ope_model_deg0_45p = (lmer(log(time)~scale(py_ope_ger_binary_th_45p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+deg_lum_ope_model_deg0_45p = (lmer(log(time)~scale(py_ope_ger_binary_th_45p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 
 summary(deg_lum_ope_model_deg0_45p)
 
 #50p
-deg_lum_ope_model_deg0_50p = (lmer(log(time)~scale(py_ope_ger_binary_th_50p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+deg_lum_ope_model_deg0_50p = (lmer(log(time)~scale(py_ope_ger_binary_th_50p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 
 summary(deg_lum_ope_model_deg0_50p)
 
 #55p
-deg_lum_ope_model_deg0_55p = (lmer(log(time)~scale(py_ope_ger_binary_th_55p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+deg_lum_ope_model_deg0_55p = (lmer(log(time)~scale(py_ope_ger_binary_th_55p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 
 summary(deg_lum_ope_model_deg0_55p)
 
 #60p
-deg_lum_ope_model_deg0_60p = (lmer(log(time)~scale(py_ope_ger_binary_th_60p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+deg_lum_ope_model_deg0_60p = (lmer(log(time)~scale(py_ope_ger_binary_th_60p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 
 summary(deg_lum_ope_model_deg0_60p)
 
 #65p
-deg_lum_ope_model_deg0_65p = (lmer(log(time)~scale(py_ope_ger_binary_th_65p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+deg_lum_ope_model_deg0_65p = (lmer(log(time)~scale(py_ope_ger_binary_th_65p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 
 summary(deg_lum_ope_model_deg0_65p)
 
 #70p
-deg_lum_ope_model_deg0_70p = (lmer(log(time)~scale(py_ope_ger_binary_th_70p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+deg_lum_ope_model_deg0_70p = (lmer(log(time)~scale(py_ope_ger_binary_th_70p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 
 summary(deg_lum_ope_model_deg0_70p)
 
 #75p
-deg_lum_ope_model_deg0_75p = (lmer(log(time)~scale(py_ope_ger_binary_th_75p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+deg_lum_ope_model_deg0_75p = (lmer(log(time)~scale(py_ope_ger_binary_th_75p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 
 summary(deg_lum_ope_model_deg0_75p)
 
 #80p
-deg_lum_ope_model_deg0_80p = (lmer(log(time)~scale(py_ope_ger_binary_th_80p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+deg_lum_ope_model_deg0_80p = (lmer(log(time)~scale(py_ope_ger_binary_th_80p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 
 summary(deg_lum_ope_model_deg0_80p)
 
 #85p
-deg_lum_ope_model_deg0_85p = (lmer(log(time)~scale(py_ope_ger_binary_th_85p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+deg_lum_ope_model_deg0_85p = (lmer(log(time)~scale(py_ope_ger_binary_th_85p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 
 summary(deg_lum_ope_model_deg0_85p)
 
 #90p
-deg_lum_ope_model_deg0_90p = (lmer(log(time)~scale(py_ope_ger_binary_th_90p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+deg_lum_ope_model_deg0_90p = (lmer(log(time)~scale(py_ope_ger_binary_th_90p)*group_num+scale(npix)*group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 
 summary(deg_lum_ope_model_deg0_90p)
 
 #Null model
-NULL_deg_lum_ope_model_deg0 = (lmer(log(time)~group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec_ger2,dat_lexdec_ger2$cond=="0%")))
+NULL_deg_lum_ope_model_deg0 = (lmer(log(time)~group_num+freq+err+(1|vp)+(1|stim),subset(dat_lexdec,dat_lexdec$cond=="0%")))
 summary(NULL_deg_lum_ope_model_deg0 )
 
 aic_deg0 = anova(NULL_deg_lum_ope_model_deg0,deg_lum_ope_model_deg0,deg_lum_ope_model_deg0_10p,deg_lum_ope_model_deg0_15p,deg_lum_ope_model_deg0_20p,deg_lum_ope_model_deg0_25p,deg_lum_ope_model_deg0_30p,deg_lum_ope_model_deg0_35p,deg_lum_ope_model_deg0_40p,deg_lum_ope_model_deg0_45p,deg_lum_ope_model_deg0_50p,deg_lum_ope_model_deg0_55p,deg_lum_ope_model_deg0_60p,deg_lum_ope_model_deg0_65p,deg_lum_ope_model_deg0_70p,deg_lum_ope_model_deg0_75p,deg_lum_ope_model_deg0_80p,deg_lum_ope_model_deg0_85p,deg_lum_ope_model_deg0_90p)
@@ -572,7 +515,7 @@ aic_deg0
 
 #plot model comparison
 aic_diff = c(aic_deg0$AIC[1]- aic_deg0$AIC[2:length(aic_ger$AIC)])
-Model = as.factor(c("original","10p","15p","20p","25p","30p","35p","40p","45p","50p","55p","60p","65p","70p","75p","80p","85p"))
+Model = as.factor(c("original","10p","15p","20p","25p","30p","35p","40p","45p","50p","55p","60p","65p","70p","75p","80p","85p","90p"))
 model_comp_plot_ger = data.frame(aic_diff,Model)
 
 aic_pl_ger = ggplot(model_comp_plot_ger,aes(y=aic_diff,x=Model,group=1))+
